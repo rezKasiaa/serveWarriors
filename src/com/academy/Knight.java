@@ -7,4 +7,12 @@ public class Knight extends Warrior {
     public int getAttack() {
         return attack;
     }
+
+    public int attack(){
+        return attack;
+    }
+
+    public void getKick(int attack){
+        setHealth(getHealth() - attack);
+    }
 }

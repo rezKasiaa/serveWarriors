@@ -4,10 +4,13 @@ public class Warrior {
     private int health = 50;
     private int attack = 5;
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public int getHealth() {
         return health;
     }
-
     public int getAttack() {
         return attack;
     }
@@ -19,6 +22,6 @@ public class Warrior {
     }
 
     public void getKick(int attack){
-        health  -= attack;
+        setHealth(getHealth() - attack);
     }
 }
