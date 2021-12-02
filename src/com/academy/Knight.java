@@ -11,8 +11,4 @@ public class Knight extends Warrior {
     public int attack(){
         return attack;
     }
-
-    public void getKick(int attack){
-        setHealth(getHealth() - attack);
-    }
 }
