@@ -25,11 +25,9 @@ public class Fight {
         while (a.isAlive() && b.isAlive()) {
             boolean isAWon = fight(a.getArmy().get(0), b.getArmy().get(0));
                 if (isAWon) {
-                    a.getKick(b.getArmy().get(0));
                     b.getDead();
                     System.out.println("a army : " + a.getArmy().size() + " b army : " + b.getArmy().size());
                 } else {
-                    b.getKick(a.getArmy().get(0));
                     a.getDead();
                     System.out.println("a army : " + a.getArmy().size() + " b army : " + b.getArmy().size());
                 }
