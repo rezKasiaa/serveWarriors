@@ -23,7 +23,8 @@ public class Fight {
     public boolean armyFight(Army a, Army b) {
         System.out.println("a army : " + a.getArmy().size() + " b army : " + b.getArmy().size());
         while (a.isAlive() && b.isAlive()) {
-            boolean isAWon = fight(a.getArmy().get(0), b.getArmy().get(0));
+            //return 1st to add
+            boolean isAWon = fight(a.getFirst(), b.getFirst());
                 if (isAWon) {
                     b.getDead();
                     System.out.println("a army : " + a.getArmy().size() + " b army : " + b.getArmy().size());

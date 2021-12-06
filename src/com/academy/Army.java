@@ -2,9 +2,13 @@ package com.academy;
 
 import org.junit.jupiter.params.aggregator.ArgumentAccessException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 
 public class Army extends Warrior {
@@ -30,10 +34,16 @@ public class Army extends Warrior {
     @Override
     public boolean isAlive() { return !army.isEmpty(); }
 
+    public Warrior getFirst() {
+        return army.get(0);
+    }
 
-    public void setArmy(List<Warrior> army) {
-        if (!army.isEmpty()) {
-            this.army = army;
+
+    public void setArmy(List<Warrior> ... army) {
+        List<Warrior> mixedTypesArmy = new LinkedList<>();
+        if (army.length != 0) {
+            Arrays.stream(army).forEach(x -> mixedTypesArmy.addAll(x));
+            this.army = mixedTypesArmy;
         } else {
             throw new ArgumentAccessException("the army is empty!");
         }
