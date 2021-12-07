@@ -2,11 +2,15 @@ package com.academy;
 
 public class Defender extends Warrior {
     private int defense = 2;
-    private int health = 60;
-    private int attack = 3;
+
+    public Defender() {super(60, 3);}
+
+    protected int getDefense() {
+        return defense;
+    }
 
     @Override
-    public void getKick(Warrior warrior){
-        health -= warrior.getAttack() - defense;
+    protected void getKick(Warrior warrior){
+        setHealth(getHealth() - warrior.getAttack() - getDefense());
     }
 }

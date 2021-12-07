@@ -1,6 +1,13 @@
 package com.academy;
 
 import org.junit.Assert;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -99,9 +106,9 @@ class WarriorTest {
     @org.junit.jupiter.api.Test
     void warrior_army_knight_army_first_fail() {
         Army army1 = new Army();
-        army1.setArmy(army1.addUnits(Warrior.class, 3));
+        army1.setArmy(army1.addUnits(Warrior.class, 40));
         Army army2 = new Army();
-        army2.setArmy(army2.addUnits(Knight.class, 3));
+        army2.setArmy(army2.addUnits(Knight.class, 37));
 
         boolean army1Win = new Fight().armyFight(army1, army2);
         assertFalse(army1Win);
@@ -117,4 +124,26 @@ class WarriorTest {
         boolean army1Win = new Fight().armyFight(army1, army2);
         assertTrue(army1Win);
     }
+
+    @org.junit.jupiter.api.Test
+    void parametrizedFight() {
+        Army army1 = new Army();
+        List<Warrior> first = army1.addUnits(Warrior.class, 3);
+        List<Warrior> second = army1.addUnits(Knight.class, 1);
+
+        Army army2 = new Army();
+        List<Warrior> fifth = army2.addUnits(Lancer.class, 1);
+        List<Warrior> third = army2.addUnits(Warrior.class, 3);
+        List<Warrior> fourth = army2.addUnits(Defender.class, 2);
+
+        army1.setArmy(first, second);
+        army1.getBehind();
+        Assert.assertEquals(4, army1.getArmy().size());
+        army2.setArmy(first, second);
+
+        boolean firstWon = new Fight().armyFight(army1,army2);
+        System.out.println(firstWon);
+    }
+
+
 }

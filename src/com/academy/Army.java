@@ -2,13 +2,11 @@ package com.academy;
 
 import org.junit.jupiter.params.aggregator.ArgumentAccessException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 
 public class Army extends Warrior {
@@ -16,8 +14,8 @@ public class Army extends Warrior {
 
     public Army() {}
 
-    public List<Warrior> getArmy() {
-        return army;
+    protected List<Warrior> getArmy() {
+        return List.copyOf(army);
     }
 
     public List<Warrior> addUnits(Class<? extends Warrior> warrior, int amountOfUnits) {
@@ -36,6 +34,16 @@ public class Army extends Warrior {
 
     public Warrior getFirst() {
         return army.get(0);
+    }
+
+    public void getBehind() {
+        for (int i = 0; i < army.size(); i++) {
+            if (i == army.size()){
+                army.get(i).setWarriorBehind(null);
+            } else {
+                army.get(i).setWarriorBehind(army.get(i++));
+            }
+        }
     }
 
 
