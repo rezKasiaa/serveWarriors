@@ -1,16 +1,12 @@
 package com.academy;
 
-import org.junit.jupiter.params.aggregator.ArgumentAccessException;
+import com.academy.warriors.Warrior;
 
-import java.util.Arrays;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 
 public class Army extends Warrior {
-    List<Warrior> army;
+    List<Warrior> army = new ArrayList<>();
 
     public Army() {}
 
@@ -18,15 +14,14 @@ public class Army extends Warrior {
         return List.copyOf(army);
     }
 
-    public List<Warrior> addUnits(Class<? extends Warrior> warrior, int amountOfUnits) {
-        List<Warrior> army = null;
-        if (warrior.getName().equals(Warrior.class.getName())) {
-            army = IntStream.rangeClosed(0, amountOfUnits - 1).mapToObj(j -> new Warrior()).collect(Collectors.toList());
-        } else if (warrior.getName().equals(Knight.class.getName())) {
-            army = IntStream.rangeClosed(0, amountOfUnits - 1).mapToObj(j -> new Knight()).collect(Collectors.toList());
+    Army addUnits(String warrior, int amountOfUnits) {
+        for (int i = 0; i < amountOfUnits; i++) {
+            army.add(Warrior.of(warrior));
+            if (i > 0 && i < amountOfUnits - 1) {
+                army.get(i - 1).setWarriorBehind(army.get(i));
+            }
         }
-
-        return army;
+        return this;
     }
 
     @Override
@@ -34,27 +29,6 @@ public class Army extends Warrior {
 
     public Warrior getFirst() {
         return army.get(0);
-    }
-
-    public void getBehind() {
-        for (int i = 0; i < army.size(); i++) {
-            if (i == army.size()){
-                army.get(i).setWarriorBehind(null);
-            } else {
-                army.get(i).setWarriorBehind(army.get(i++));
-            }
-        }
-    }
-
-
-    public void setArmy(List<Warrior> ... army) {
-        List<Warrior> mixedTypesArmy = new LinkedList<>();
-        if (army.length != 0) {
-            Arrays.stream(army).forEach(x -> mixedTypesArmy.addAll(x));
-            this.army = mixedTypesArmy;
-        } else {
-            throw new ArgumentAccessException("the army is empty!");
-        }
     }
 
     public void getDead(){

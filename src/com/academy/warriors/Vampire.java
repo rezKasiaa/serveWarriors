@@ -1,4 +1,6 @@
-package com.academy;
+package com.academy.warriors;
+
+import com.academy.warriors.Warrior;
 
 public class Vampire extends Warrior {
     private int vampirism = 50;

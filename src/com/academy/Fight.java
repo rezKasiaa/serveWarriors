@@ -1,18 +1,17 @@
 package com.academy;
 
-public class Fight {
-    public boolean fight(Warrior a, Warrior b) {
-      boolean flag = true;
-        System.out.println("a health :" + a.getHealth() + " b health: " + b.getHealth());
+import com.academy.warriors.Warrior;
 
-      while (a.getHealth() > 0 && b.getHealth() > 0) {
+public class Fight {
+    public static boolean fight(Warrior a, Warrior b) {
+      boolean flag = true;
+
+      while (a.isAlive() && b.isAlive()) {
           if (flag) {
-              b.getKick(a);
-              System.out.println("a health :" + a.getHealth() + " b health: " + b.getHealth());
+              a.attack(b);
               flag = false;
           } else {
-              a.getKick(b);
-              System.out.println("a health :" + a.getHealth() + " b health: " + b.getHealth());
+              b.attack(a);
               flag = true;
           }
       }
@@ -20,20 +19,15 @@ public class Fight {
         return a.isAlive();
     }
 
-    public boolean armyFight(Army a, Army b) {
-        System.out.println("a army : " + a.getArmy().size() + " b army : " + b.getArmy().size());
+    public static boolean armyFight(Army a, Army b) {
         while (a.isAlive() && b.isAlive()) {
-            //return 1st to add
             boolean isAWon = fight(a.getFirst(), b.getFirst());
                 if (isAWon) {
                     b.getDead();
-                    System.out.println("a army : " + a.getArmy().size() + " b army : " + b.getArmy().size());
                 } else {
                     a.getDead();
-                    System.out.println("a army : " + a.getArmy().size() + " b army : " + b.getArmy().size());
                 }
         }
-
         return a.isAlive();
     }
 }
